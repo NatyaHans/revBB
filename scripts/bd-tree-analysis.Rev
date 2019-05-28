@@ -1,3 +1,10 @@
+#read in trees
+tre = readTrees("../data_simtreebd")[1]
+
+#set up moves and monitors
+moves = VectorMoves()
+monitors = VectorMonitors()
+
 #define diversification stuffs
 diversification_mean <- 1
 diversification_sd <- 0.2
