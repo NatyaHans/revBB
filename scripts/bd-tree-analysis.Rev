@@ -1,0 +1,32 @@
+#read in trees
+tre = readTrees("../data_simtreebd")[1]
+
+#set up moves and monitors
+moves = VectorMoves()
+monitors = VectorMonitors()
+
+#define diversification stuffs
+diversification_mean <- 1
+diversification_sd <- 0.2
+
+#define diversification prior as lognormal, why IDK
+diversification ~ dnLognormal(mean=diversification_mean, sd=diversification_sd)
+
+
+#turnover prior as lognormal, IDK why again...
+turnover_mean <- 0.3
+turnover_sd <- 0.1*2
+turnover ~ dnLognormal(mean=turnover_mean,sd=turnover_sd)
+
+#proposal for turnover
+moves.append( mvScale(turnover,lambda=1.0,tune=true,weight=3.0) )
+
+#Proposals for diversification
+moves.append( mvScale(diversification,lambda=1.0,tune=true,weight=3.0) )
+
+#deterministic nodes
+birth_rate := diversification + turnover
+death_rate := turnover
+
+#set up tree model
+timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_time, samplingStrategy="uniform", condition="survival", taxa=taxa)
