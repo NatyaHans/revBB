@@ -32,8 +32,11 @@ moves.append( mvScale(diversification,lambda=1.0,tune=true,weight=3.0) )
 birth_rate := diversification + turnover
 death_rate := turnover
 
+#offset parameter
+#age_guess <- dnNormal(tree.rootAge())
+
 #root time 
-root_time ~ dnExponential(1, offset=45) 
+root_time ~ dnExponential(1, offset=tre.rootAge()) 
 
 #sampling 
 rho <- 1.0
