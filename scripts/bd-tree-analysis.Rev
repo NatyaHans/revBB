@@ -1,22 +1,26 @@
 #read in trees
-tre = readTrees("../data_simtreebd")[1]
+tre = readTrees("../data_simtreebd/simbd_1_.nex")[1]
+taxa <- tre.taxa()
+#clock_rate <- 3 / tre.treeLength()
+
+
 
 #set up moves and monitors
 moves = VectorMoves()
 monitors = VectorMonitors()
 
 #define diversification stuffs
-diversification_mean <- 1
-diversification_sd <- 0.2
+diversification_mean <- 10
+diversification_sd <- 0.587405
 
 #define diversification prior as lognormal, why IDK
-diversification ~ dnLognormal(mean=diversification_mean, sd=diversification_sd)
+diversification ~ dnLognormal(mean=ln(diversification_mean), sd=diversification_sd)
 
 
 #turnover prior as lognormal, IDK why again...
-turnover_mean <- 0.3
-turnover_sd <- 0.1*2
-turnover ~ dnLognormal(mean=turnover_mean,sd=turnover_sd)
+turnover_mean <- 10
+turnover_sd <- 0.587405
+turnover ~ dnLognormal(mean=ln(turnover_mean),sd=turnover_sd)
 
 #proposal for turnover
 moves.append( mvScale(turnover,lambda=1.0,tune=true,weight=3.0) )
@@ -28,5 +32,25 @@ moves.append( mvScale(diversification,lambda=1.0,tune=true,weight=3.0) )
 birth_rate := diversification + turnover
 death_rate := turnover
 
+#root time 
+root_time ~ dnExponential(1, offset=45) 
+
+#sampling 
+rho <- 1.0
+
 #set up tree model
 timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_time, samplingStrategy="uniform", condition="survival", taxa=taxa)
+timetree.clamp(tre)
+
+#set up model for mcmc 
+bd_model = model(birth_rate)
+
+#set up file writers
+monitors.append( mnModel(filename="output/test-bd-analysis.log",printgen=10, separator = TAB ))
+monitors.append( mnScreen(printgen=100, birth_rate, death_rate) ) 
+
+#set up mcmc
+mcmc = mcmc(bd_model, monitors, moves, nruns=2, combine="mixed") 
+
+#run dat ting
+mcmc.run(generations=10000)
