@@ -57,3 +57,5 @@ mcmc = mcmc(bd_model, monitors, moves, nruns=2, combine="mixed")
 
 #run dat ting
 mcmc.run(generations=10000)
+
+source("ss-marginal.Rev")
