@@ -10,7 +10,7 @@ TL <- sim_tree.treeLength()
 clock_rate <- 3 / TL
 
 for ( j in 1:n_branches ) {
-   branch_rate[j] <- rlognormal(n=1,clock_rate,sd=0.3)[1]
+   branch_rate[j] <- rlognormal(n=1,ln(clock_rate),sd=0.3)[1]
 }
 
 Q <- fnJC(4)
