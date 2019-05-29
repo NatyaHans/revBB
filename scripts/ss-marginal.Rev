@@ -1,0 +1,6 @@
+mymodel = model(turnover)
+pow_p = powerPosterior(mymodel, moves, monitors, "output/model1.out", cats=20)
+pow_p.burnin(generations=5,tuningInterval=1) 
+pow_p.run(generations=200) 
+ss = steppingStoneSampler(file="output/model1.out", powerColumnName="power", likelihoodColumnName="likelihood")
+ss.marginal()
