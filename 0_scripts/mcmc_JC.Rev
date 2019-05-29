@@ -10,8 +10,8 @@
 
 ### Read in sequence data for both genes
 for(i in 1:100){
-data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
-sim_tree = readTrees("1_data_simtreebd/simbd_"+i+"_.nex")[1]
+data = readDiscreteCharacterData("../2_seqdata_simseqbd/seq_sim_"+i+".nex")
+sim_tree = readTrees("../1_data_simtreebd/simbd_"+i+"_.nex")[1]
 
 # Get some useful variables from the data. We need these later on.
 num_taxa <- data.ntaxa()

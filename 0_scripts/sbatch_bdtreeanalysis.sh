@@ -22,3 +22,6 @@ module load revbayes/1.0.11
 # change the script name and path
 
 rb bd-tree-analysis.Rev
+
+# nhans@ufl.edu
+

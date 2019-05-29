@@ -22,3 +22,6 @@ module load revbayes/1.0.11
 # change the script name and path
 
 rb mcmc_JC.Rev
+
+
+# email: nhans@ufl.edu
