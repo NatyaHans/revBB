@@ -1,11 +1,3 @@
-readTrees("simtreebd/simbd_1_.nex")
-readTrees("simtreebd/simbd_1000_.nex")
-readTrees("data_simtreebd/simbd_1000_.nex")
-T<-readTrees("data_simtreebd/simbd_1000_.nex")
-T.taxa()
-taxa<-T.taxa()
-T.ntips()
-T.ntaxa()
 T.methods()
 T.size()
 x<-T.ntips()
@@ -94,3 +86,15 @@ q()
 source("scripts/seq_sim.Rev")
 getwd()
 source("scripts/mcmc_JC.Rev")
+data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
+i=1
+data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
+source("0_scripts/mcmc_JC.Rev")
+q()
+source("scripts/mcmc_BDS.Rev")
+source("0_scripts/mcmc_BDS.Rev")
+?mcmc
+source("0_scripts/mcmc_BDS.Rev")
+?HomologousDiscreteCharacterDatamatrix
+?HomologousDiscreteCharacterData
+q()
