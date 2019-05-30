@@ -149,3 +149,5 @@ map_tree = mapTree(treetrace,"output_seq/seq_sim_test"+i+".tree")
 }
 # you may want to quit RevBayes now
 q()
+
+##ASK ABOUT OUTPUTTING BRANCHRATES!!!!!
