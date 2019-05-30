@@ -1,3 +1,68 @@
+T.methods()
+T.size()
+x<-T.ntips()
+x<-T.ntaxa()
+T.methods()
+T.unique()
+T.contains()
+T<-readTrees("data_simtreebd/simbd_1000_.nex")
+T
+T.taxa()
+T<-readTrees("da_.nex")[1]
+T.taxa()
+T.ntaxa()
+T.ntips()
+i=10
+T<-readTrees(print("data_simtreebd/simbd_"+i+"_.nex")
+)
+i
+i=1000
+T<-readTrees(print("data_simtreebd/simbd_"+i+"_.nex"))
+T<-readTrees(print("data_simtreebd/simbd_"+i+"_.nex"))[1]
+T<-readTrees("data_simtreebd/simbd_1000_.nex")[1]
+T<-readTrees(print("data_simtreebd/simbd_"+i+"_.nex"))[1]
+q()
+source("scripts/seq_sim.Rev")
+q()
+source("scripts/mcmc_JC.Rev")
+i<-1
+i
+data = readDiscreteCharacterData("data_simtreebd/simbd_"+i+"_.nex")
+data = readDiscreteCharacterData("output/simbd_"+i+"_.nex")
+data = readDiscreteCharacterData("output/seq_sim_"+i+"_.nex")
+data = readDiscreteCharacterData("output/seq_sim_"+i+".nex")
+source("scripts/mcmc_JC.Rev")
+num_taxa
+num_branches
+taxa
+Q
+bl
+TL
+psi
+clear()
+source("scripts/mcmc_JC.Rev")
+topology
+bl
+treeAssembly(topology,bl)
+bl.size
+()
+num_branches
+data.size
+()
+str.data
+()
+data.str()
+data.ntaxa()
+data.taxa()
+bl
+bl.max()
+bl.min()
+topology
+topology.size()
+size.topology()
+topology.size()
+bl
+treeAssembly(topology,bl)
 ?treeAssembly
 num_branches
 bl.size()
@@ -21,80 +86,15 @@ q()
 source("scripts/seq_sim.Rev")
 getwd()
 source("scripts/mcmc_JC.Rev")
-readTrees()
-?readTrees()
-readTrees(file="1_data_simtreebd/simbd_25")
-readTrees(file="1_data_simtreebd/simbd_25_.nex")
-readTrees(file="1_data_simtreebd/simbd_1_.nex")
-tre = readTrees(file="1_data_simtreebd/simbd_1_.nex")
-tre.methods()
+data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
+i=1
+data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
+source("0_scripts/mcmc_JC.Rev")
 q()
-readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_1.nex")
-aln = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_1.nex")
-aln
-aln.methods()
-aln.computeMultinomialProfileLikelihood()
-Q <- fnJC(4)
-Q
-Q.methods()
-topology = readTree("1_data_simtreebd/simbd_1_.nex")
-readTree("1_data_simtreebd/simbd_1_.nex")
-readTrees("1_data_simtreebd/simbd_1_.nex")
-topology = readTrees("1_data_simtreebd/simbd_1_.nex")
-?phyloCTMC
-?phyloCTMC()
-?phyloCTMC
-tre
-topology.methods()
-seq ~ dnPhyloCTMC(tree=topology, Q=Q, type="DNA")
-topology.methods()
-topology
-3 / tree.treeLength()
-3 / topology.treeLength()
-topology.length()
-topology
-topology.TL()
-topology.tl()
-topology.rootAge()
-topology.methods()
-topology = readTrees("1_data_simtreebd/simbd_1_.nex")
-topology.taxa()
-topology = readTrees("1_data_simtreebd/simbd_1_.nex")[1]
-topology.rootAge()
-seq ~ dnPhyloCTMC(tree=topology, Q=Q, type="DNA")
-seq.clamp(aln)
-mymod = model(seq)
-mymod.methods()
-seq.methods()
-seq.lnProbability()
-q()
-source("0_scripts/calculate-bd-likelihood")
-source("0_scripts/calculate-bd-likelihood.Rev")
-q()
-dnBDP?
-?dnBDP
-?mn
-ls(all=True)
-ls(all=true)
-?mnFile
-source("0_scripts/calculate-bd-likelihood.Rev")
-tre
-tre.methods()
-for( i in tre.nnodes:1){ 
-for( i in tre.nnodes():1){ bl[i] = tre.branchLength(i) }  
-bl[1]
-bl[2]
-bl[3]
-bl[4]
-?steppingStoneSampler
-source("bd-tree-analysis.Rev")
-source("0_scripts/bd-tree-analysis.Rev")
-?ss.marginal
-?ss.marginal()
-?steppingStoneSampler.marginal()
-?steppingStoneSampler.marginal
-q()
-?mnScreen
-marginalLike
-source("0_scripts/bd-tree-analysis.Rev")
+source("scripts/mcmc_BDS.Rev")
+source("0_scripts/mcmc_BDS.Rev")
+?mcmc
+source("0_scripts/mcmc_BDS.Rev")
+?HomologousDiscreteCharacterDatamatrix
+?HomologousDiscreteCharacterData
 q()
