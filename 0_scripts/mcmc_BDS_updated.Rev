@@ -35,9 +35,6 @@ NUM_TOTAL_SPECIES     = 50
 NUM_RATE_CATEGORIES   = 4
 H = 0.587405
 
-# Create a constant variable for the rate matrix
-Q <- fnJC(NUM_RATE_CATEGORIES)
-
 ####################
 # Create the rates #
 ####################
@@ -86,14 +83,14 @@ rho <- observed_phylogeny.ntips() / NUM_TOTAL_SPECIES
 timetree ~ dnCDBDP( rootAge           = root,
                     speciationRates   = speciation,
                     extinctionRates   = extinction,
-                    Q                 = Q,
+                    Q                 = fnJC(NUM_RATE_CATEGORIES),
                     delta             = event_rate,
                     pi                = rate_cat_probs,
                     rho               = rho,
                     condition         = "survival" )
 
-### clamp the model with the "observed" tree
-#timetree.clamp(observed_phylogeny)
+### initialize the tips of the tree
+timetree.setValue(observed_phylogeny)
 
 moves.append( mvNarrow(timetree, weight=num_taxa) )
 moves.append( mvFNPR(timetree, weight=num_taxa/4) )
@@ -104,8 +101,17 @@ moves.append( mvNodeTimeSlideUniform(timetree, weight=num_taxa) )
 # PhyloCTMC Model #
 ###################
 
+# Create a constant variable for the rate matrix
+Q <- fnJC(4)
+
+# Draw branch lengths from a relaxed molecular clock model
 clock_rate ~ dnExponential( 1.0 )
 moves.append( mvScale( clock_rate, weight=2 ) )
+
+for ( j in 1:n_branches ) {
+   branch_rate[j] ~ dnLognormal(ln(clock_rate)-0.5*0.3^2,sd=0.3)
+   moves.append( mvScale( branch_rate[j], weight=2 ) )
+}
 
 # the sequence evolution model
 seq ~ dnPhyloCTMC(tree=timetree, Q=Q, branchRates=clock_rate, type="DNA")

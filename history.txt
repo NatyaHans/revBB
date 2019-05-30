@@ -1,9 +1,3 @@
-T.methods()
-T.size()
-x<-T.ntips()
-x<-T.ntaxa()
-T.methods()
-T.unique()
 T.contains()
 T<-readTrees("data_simtreebd/simbd_1000_.nex")
 T
@@ -97,4 +91,10 @@ source("0_scripts/mcmc_BDS.Rev")
 source("0_scripts/mcmc_BDS.Rev")
 ?HomologousDiscreteCharacterDatamatrix
 ?HomologousDiscreteCharacterData
+q()
+source("scripts/mcmc_BDS.Rev")
+source("0_scripts/mcmc_BDS.Rev")
+clear()
+source("0_scripts/mcmc_BDS.Rev")
+?mvScale
 q()
