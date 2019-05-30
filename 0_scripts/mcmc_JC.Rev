@@ -9,7 +9,7 @@
 
 
 ### Read in sequence data for both genes
-for(i in 1:100){
+for(i in 1:10){
 data = readDiscreteCharacterData("../2_seqdata_simseqbd/seq_sim_"+i+".nex")
 sim_tree = readTrees("../1_data_simtreebd/simbd_"+i+"_.nex")[1]
 
@@ -26,14 +26,14 @@ monitors = VectorMonitors()
 ######################
 
 # create a constant variable for the rate matrix
-Q <- fnJC(4) 
+Q <- fnJC(4)
 
 
 ##############
 # Tree model #
 ##############
 
-# Prior distribution on the tree topology  
+# Prior distribution on the tree topology
 
 speciation_rate ~ dnExponential(10)
 extinction_rate ~ dnExponential(10)
@@ -52,10 +52,10 @@ rho <- Probability(num_taxa/true_num_taxa) #extant species only
 #extant_mrca <- 1.0 #with no fossil taxa, you have no absolute time data
 extant_mrca <- sim_tree.rootAge()
 
-#prior distribution on the tree (AKA node age prior) #specifying random distribution, not drawing r.v.
-psi ~ dnBDP(lambda=speciation_rate, mu=extinction_rate, rho=rho, 
-				  rootAge=extant_mrca, samplingStrategy="uniform", condition="nTaxa", taxa=taxa)
-				  
+#prior distribution on the tree (AKA node age prior)
+psi ~ dnBDP(lambda=speciation_rate, mu=extinction_rate, rho=rho,
+				  rootAge=extant_mrca, samplingStrategy="uniform", condition="survival", taxa=taxa)
+
 
 moves.append( mvNarrow(psi, weight=num_taxa) )
 moves.append( mvFNPR(psi, weight=num_taxa/4) )
@@ -66,8 +66,11 @@ moves.append( mvNodeTimeSlideUniform(psi, weight=num_taxa) )
 # PhyloCTMC Model #
 ###################
 
+clock_rate ~ dnExponential( 1.0 )
+moves.append( mvScale( clock_rate, weight=2 ) )
+
 # the sequence evolution model
-seq ~ dnPhyloCTMC(tree=psi, Q=Q, type="DNA")
+seq ~ dnPhyloCTMC(tree=psi, Q=Q, branchRates=clock_rate, type="DNA")
 
 # attach the data
 seq.clamp(data)
@@ -81,8 +84,8 @@ mymodel = model(psi)
 
 # add monitors
 monitors.append( mnScreen(speciation_rate, printgen=1000) )
-monitors.append( mnFile(psi, filename="output_seq/seq_sim_"+i+".trees", printgen=10) )
-monitors.append( mnModel(filename="output_seq/seq_sim_"+i+".log", printgen=10) )
+monitors.append( mnFile(psi, filename="output_seq/seq_sim_test"+i+".trees", printgen=10) )
+monitors.append( mnModel(filename="output_seq/seq_sim_test"+i+".log", printgen=10) )
 
 # run the analysis
 mymcmc = mcmc(mymodel, moves, monitors, nruns=2, combine="mixed")
@@ -95,11 +98,10 @@ mymcmc.run(generations=20000,tuningInterval=200)
 
 # Now, we will analyze the tree output_seq.
 # Let us start by reading in the tree trace
-treetrace = readTreeTrace("output_seq/seq_sim_"+i+".trees", treetype="non-clock")
+treetrace = readTreeTrace("output_seq/seq_sim_test"+i+".trees", treetype="non-clock")
 # and then get the MAP tree
-map_tree = mapTree(treetrace,"output_seq/seq_sim_"+i+".tree")
+map_tree = mapTree(treetrace,"output_seq/seq_sim_test"+i+".tree")
 
 }
 # you may want to quit RevBayes now
 q()
-
