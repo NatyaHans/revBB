@@ -1,5 +1,6 @@
 #read in trees
-tre = readTrees("../data_simtreebd/simbd_1_.nex")[1]
+for(i in 1:100){
+tre = readTrees("../1_data_simtreebd/simbd_"+i+"_.nex")[1]
 taxa <- tre.taxa()
 #clock_rate <- 3 / tre.treeLength()
 
@@ -49,7 +50,7 @@ timetree.clamp(tre)
 bd_model = model(birth_rate)
 
 #set up file writers
-monitors.append( mnModel(filename="output/test-bd-analysis.log",printgen=10, separator = TAB ))
+monitors.append( mnModel(filename="output/test-bd-analysis"+i+".log",printgen=10, separator = TAB ))
 monitors.append( mnScreen(printgen=100, birth_rate, death_rate) ) 
 
 #set up mcmc
@@ -59,3 +60,4 @@ mcmc = mcmc(bd_model, monitors, moves, nruns=2, combine="mixed")
 mcmc.run(generations=10000)
 
 source("ss-marginal.Rev")
+}
