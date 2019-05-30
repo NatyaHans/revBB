@@ -1,18 +1,21 @@
 # Project Pipeline
 # All the scripts are in folder 0_scripts
 
-# Simulate  bd trees using the script simtreebd.R in R
-    - Folder Name: 1_data_simtreebd
-    -dependencies simulate.NotNullTree.R
-    -taxa size 50, simulated trees =1000 (in nexus format)
-    -data saved in folder data_simtreebd
+# Question1: For a fixed tree topology, can we estimate speciation and extinction rates? 
+## Approach:
+    - Simulate birth death trees ( script simtreebd.R in R) 
+                  - Folder Name: 1_data_simtreebd
+                  - dependencies simulate.NotNullTree.R
+                  - Fixed taxa size 50,
+                  - output simulated trees =1000 (in nexus format)
+                  - data saved in folder 1_data_simtreebd
 
 # Simulate alignments using RevBayes
     - Folder Name: 2_seqdata_simseqbd
     - dependencies seq_sim.Rev
     - simulated under relaxed clock model (lognormal) and JC substitution model
 
-# Part 1
+# Part 1 : 
   # Branch 1
     - Treat trees as fixed
     - Run through RevBayes using bd-tree-analysis.Rev
