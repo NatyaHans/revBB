@@ -104,6 +104,7 @@ moves.append( mvNodeTimeSlideUniform(timetree, weight=num_taxa) )
 # PhyloCTMC Model #
 ###################
 
+#GLOBAL MOLECULAR CLOCK
 clock_rate ~ dnExponential( 1.0 )
 moves.append( mvScale( clock_rate, weight=2 ) )
 
@@ -151,3 +152,4 @@ map_tree = mapTree(treetrace,"output_seq/seq_sim_test"+i+".tree")
 q()
 
 ##ASK ABOUT OUTPUTTING BRANCHRATES!!!!!
+#ALSO, need a version to do analysis under relaxed clock model
