@@ -5,8 +5,6 @@ taxa <- tre.taxa()
 
 #clock_rate <- 3 / tre.treeLength()
 
-
-
 #set up moves and monitors
 moves = VectorMoves()
 monitors = VectorMonitors()
@@ -71,7 +69,7 @@ monitors.append( mnScreen(marginalLike) )
 marginalLike = ss.marginal()
 
 #TODO: figure out why this is broken, not writing or creating file
-monitors.append( mnFile(marginalLike, filename="output/marginal_" +i+ "_.log", separator=TAB) )
+monitors.append( write(marginalLike, filename="5_output_marginal/marginal_" +i+ "_.log", separator=TAB) )
 
 
 }
