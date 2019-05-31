@@ -12,7 +12,11 @@ taxa<-50 # taxa
 #
 tree<-sim.rateshift.taxa(n=taxa,numbsim = sim,lambda = lambda,mu=mu,frac = frac, times = times, complete = FALSE)
 
-write.nexus(tree,file = "simbdtreelist.nex")
+for(i in 1:sim){
+
+write.nexus(tree[[i]],file = paste("simbdstree",i,".nex",sep=""))
+
+}
 
 
 
