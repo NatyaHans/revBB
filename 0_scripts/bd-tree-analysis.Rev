@@ -2,25 +2,31 @@
 for(i in 1:100){
 tre = readTrees("1_data_simtreebd/simbd_"+i+"_.nex")[1]
 taxa <- tre.taxa()
-
-#clock_rate <- 3 / tre.treeLength()
+tree_length <- tre.treeLength()
 
 #set up moves and monitors
 moves = VectorMoves()
 monitors = VectorMonitors()
+
+####################
+# Create the rates #
+####################
+
+### Specify a prior on the speciation and extinction rates
+rate_mean <- (NUM_TOTAL_SPECIES-2) / tree_length
 
 #define diversification stuffs
 diversification_mean <- 10
 diversification_sd <- 0.587405
 
 #define diversification prior as lognormal, why IDK
-diversification ~ dnLognormal(mean=ln(diversification_mean), sd=diversification_sd)
+diversification ~ dnLognormal(mean=rate_mean, sd=diversification_sd)
 
 
 #turnover prior as lognormal, IDK why again...
 turnover_mean <- 10
 turnover_sd <- 0.587405
-turnover ~ dnLognormal(mean=ln(turnover_mean),sd=turnover_sd)
+turnover ~ dnLognormal(mean=rate_mean/2,sd=turnover_sd)
 
 #proposal for turnover
 moves.append( mvScale(turnover,lambda=1.0,tune=true,weight=3.0) )
@@ -32,24 +38,21 @@ moves.append( mvScale(diversification,lambda=1.0,tune=true,weight=3.0) )
 birth_rate := diversification + turnover
 death_rate := turnover
 
-#offset parameter
-#age_guess <- dnNormal(tree.rootAge())
-
 #root time
-root_time ~ dnExponential(1, offset=tre.rootAge())
+root_age <- tre.rootAge()
 
 #sampling
 rho <- 1.0
 
 #set up tree model
-timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_time, samplingStrategy="uniform", condition="survival", taxa=taxa)
+timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_age, samplingStrategy="uniform", condition="survival", taxa=taxa)
 timetree.clamp(tre)
 
 #set up model for mcmc
 bd_model = model(birth_rate)
 
 #set up file writers
-monitors.append( mnModel(filename="output/test-bd-analysis"+i+".log",printgen=10, separator = TAB ))
+monitors.append( mnModel(filename="output/tree-bd-analysis"+i+".log",printgen=10, separator = TAB ))
 monitors.append( mnScreen(printgen=100, birth_rate, death_rate) )
 
 #set up mcmc
