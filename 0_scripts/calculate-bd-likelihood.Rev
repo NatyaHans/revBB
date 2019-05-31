@@ -1,8 +1,16 @@
+#TODO: for loop for the CV
 
 filename = "2_seqdata_simseqbd/seq_sim_1.nex"
 
 #read in (held out) discrete character data
 aln <- readDiscreteCharacterData(filename)
+
+#TODO: add the xclusion of certain sites for ocross val
+aln.includeAll() #unmask all sites
+#todo decide how to do this, come kind o for loop
+n_test = 250
+aln.exlcudeCharacter(1:n_test) # now multiply index variable by n_test
+
 
 #rate matrix, need to read in from posterior estimates
 Q <- fnJC(4)
@@ -10,19 +18,18 @@ Q <- fnJC(4)
 #read in tree topology, now as constant, can pass directly
 #TODO: this tree topology should be
 tre <- readTrees("1_data_simtreebd/simbd_1_.nex")[1]
+#TODOL read rates in from posterior log
+phylo := fnChronoToPhylo(tre);
+
 #get taxa
 taxa <- tre.taxa()
 
 #calibrate root time/age
 root_time = tre.rootAge()
 
-#tree prior
-#treeprior ~ dnBDP(lambda=0.1, mu=0.0, rho=0.7, rootAge=root_time, #samplingStrategy="uniform", condition="survival", taxa=taxa)
-#treeprior.clamp(tre)
-
 #create stochastic node
 #TODO: transform to phylograms prior to like comps
-seqs ~ dnPhyloCTMC(tree=tre, Q=Q, type="DNA")
+seqs ~ dnPhyloCTMC(tree=phylo, Q=Q, type="DNA")
 
 #now attach data to the node
 seqs.clamp(aln)
@@ -32,4 +39,4 @@ logprob := seqs.lnProbability()
 
 #write out lnLike to file
 cerberus = VectorMonitors()
-cerberus.append( write(logprob, filename="5_output_marginal/cv_loglike_1.log") )
+cerberus.append( write(logprob, filename="5_output_modelselect/cv_loglike_1.log") )
