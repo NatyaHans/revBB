@@ -25,7 +25,7 @@
   - Compare where Branch 1's parameters lie on the histograms?
 
 
-# Part 2: Comparing SS and Cross-validation (CV) for joint (Q,Tree prior,clock) model selection
+# Part 2: Comparing Stepping Stone (SS) sampling and Cross-validation (CV) for joint (Q,Tree prior,clock) model selection
     - Use alignment as data, holding out a test set (25% of sites) for CV approach
     - Run through RevBayes using mcmc_BDS.Rev (joint estimation of tree & params)
 ## Branch 1
