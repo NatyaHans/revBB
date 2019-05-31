@@ -101,10 +101,14 @@ moves.append( mvNodeTimeSlideUniform(timetree, weight=num_taxa) )
 # PhyloCTMC Model #
 ###################
 
+<<<<<<< HEAD:0_scripts/mcmc_BDS_updated.Rev
 # Create a constant variable for the rate matrix
 Q <- fnJC(4)
 
 # Draw branch lengths from a relaxed molecular clock model
+=======
+#GLOBAL MOLECULAR CLOCK
+>>>>>>> b8de7b555c1351f068aab39d78588d2e336fb832:0_scripts/mcmc_BDS.Rev
 clock_rate ~ dnExponential( 1.0 )
 moves.append( mvScale( clock_rate, weight=2 ) )
 
@@ -157,3 +161,4 @@ map_tree = mapTree(treetrace,"output_seq/seq_sim_test"+i+".tree")
 q()
 
 ##ASK ABOUT OUTPUTTING BRANCHRATES!!!!!
+#ALSO, need a version to do analysis under relaxed clock model
