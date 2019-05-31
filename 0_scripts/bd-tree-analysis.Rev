@@ -20,19 +20,19 @@ H=0.587405
 rate_mean <- (NUM_TOTAL_SPECIES-2) / tree_length
 
 speciation_mean ~ dnLoguniform( 1E-6, 1E2)
-extinction_mean ~ dnLoguniform( 1E-6, 1E2)
-
-
+speciation_mean.setValue( rate_mean )
+moves.append( mvScale(speciation_mean, lambda=1, tune=true, weight=2.0) )
 speciation_sd ~ dnExponential( 1.0 / H )
+moves.append( mvScale(speciation_sd, lambda=1, tune=true, weight=2.0) )
+
+extinction_mean ~ dnLoguniform( 1E-6, 1E2)
 extinction_mean.setValue( speciation_mean / 2.0 )
+moves.append( mvScale(extinction_mean, lambda=1, tune=true, weight=2.0) )
 
 speciation := fnDiscretizeDistribution( dnLognormal(ln(speciation_mean), speciation_sd), NUM_RATE_CATEGORIES )
 extinction := rep( extinction_mean, NUM_RATE_CATEGORIES )
 
-moves.append( mvScale(speciation_mean, lambda=1, tune=true, weight=2.0) )
-moves.append( mvScale(extinction_mean, lambda=1, tune=true, weight=2.0) )
-moves.append( mvScale(speciation_sd, lambda=1, tune=true, weight=2.0) )
-
+### Create a exponential distributed variable for the rate of rate-shift events
 event_rate ~ dnUniform(0.0, 100.0/tree_length)
 moves.append( mvScale(event_rate, lambda=1, tune=true, weight=2.0) )
 
@@ -55,23 +55,23 @@ timetree ~ dnCDBDP( rootAge           = root_age,
                     delta             = event_rate,
                     pi                = rate_cat_probs,
                     rho               = rho,
-                    condition         = "time" )
+                    condition         = "survival" )
 timetree.clamp(tre)
 
 #set up model for mcmc
 my_model = model(speciation)
 
 #set up file writers
-monitors.append( mnModel(filename="3_treeInference/tree-bd-analysis"+i+".log",printgen=10, separator = TAB ))
-monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="3_treeInference/branchrates-stocastic"+i+".log") )
-monitors.append( mnScreen(printgen=10, event_rate, speciation_mean, extinction_mean) )
+monitors.append( mnModel(filename="3_treeInference/tree-bd-analysis"+i+".log",printgen=100, separator = TAB ))
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="3_treeInference/branchrates-stocastic"+i+".log") )
+monitors.append( mnScreen(printgen=100, event_rate, speciation_mean, extinction_mean) )
 
 #set up mcmc
 mymcmc = mcmc(my_model, monitors, moves, nruns=2, combine="mixed")
 
 #run dat analysis
-n_mcmc <- 10000
-mcmc.run(generations=n_mcmc)
+n_mcmc <- 20000
+mymcmc.run(generations=n_mcmc)
 
 #now run SS
 source("0_scripts/ss-marginal.Rev")
