@@ -1,6 +1,6 @@
 #read in trees
 for(i in 1:100){
-tre = readTrees("1_data_simtreebd/simbdshifttree.nex")[i]
+tre = readTrees("1_data_simtreebd/simbdstree"+i+".nex")[1]
 taxa <- tre.taxa()
 tree_length <- tre.treeLength()
 
@@ -67,7 +67,7 @@ my_model = model(speciation)
 monitors.append( mnModel(filename="3_treeInference/tree-bd-analysis"+i+".log",printgen=100, separator = TAB ))
 monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="3_treeInference/branchrates-stocastic"+i+".log") )
 monitors.append( mnScreen(printgen=100, event_rate, speciation_mean, extinction_mean) )
-
+monitors.append( mnExtNewick(timetree,filename="3_treeInference/posteriortrees"+i+"nex",printgen=50)) 
 #set up mcmc
 mymcmc = mcmc(my_model, monitors, moves, nruns=2, combine="mixed")
 

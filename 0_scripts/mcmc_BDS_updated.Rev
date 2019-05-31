@@ -16,7 +16,7 @@ for (i in 1:100){
 data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
 
 # Read in the observed phylogeny
-observed_phylogeny <- readTrees("1_data_simtreebd/simbdshifttree.nex")[1]
+observed_phylogeny <- readTrees("1_data_simtreebd/simbdstree"+i+".nex")[1]
 
 # Get the names of the taxa in the tree and the age of the tree. We need these later on.
 taxa <- observed_phylogeny.taxa()
@@ -127,7 +127,7 @@ mymodel = model(timetree)
 monitors.append( mnScreen(printgen=100, event_rate, speciation_mean) )
 monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="4_seqInference/seq_sim"+i+".trees") )
 monitors.append( mnModel(filename="4_seqInference/seq_sim"+i+".log",printgen=100, separator = TAB) )
-
+monitors.append( mnExtNewick(timetree,filename="4_seqInference/posteriortreesoonseq"+i+".nex",printgen=50)) 
 
 ################
 # The Analysis #
