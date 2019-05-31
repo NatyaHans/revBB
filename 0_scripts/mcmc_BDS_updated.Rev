@@ -12,7 +12,7 @@
 # Reading in the Data #
 #######################
 
-i<-1
+for (i in 1:1){
 data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
 
 # Read in the observed phylogeny
@@ -101,16 +101,14 @@ moves.append( mvNodeTimeSlideUniform(timetree, weight=num_taxa) )
 # PhyloCTMC Model #
 ###################
 
-<<<<<<< HEAD:0_scripts/mcmc_BDS_updated.Rev
 # Create a constant variable for the rate matrix
 Q <- fnJC(4)
 
 # Draw branch lengths from a relaxed molecular clock model
-=======
-#GLOBAL MOLECULAR CLOCK
->>>>>>> b8de7b555c1351f068aab39d78588d2e336fb832:0_scripts/mcmc_BDS.Rev
 clock_rate ~ dnExponential( 1.0 )
 moves.append( mvScale( clock_rate, weight=2 ) )
+
+n_branches <- observed_phylogeny.ntips()*2-2
 
 for ( j in 1:n_branches ) {
    branch_rate[j] ~ dnLognormal(ln(clock_rate)-0.5*0.3^2,sd=0.3)
@@ -132,8 +130,8 @@ mymodel = model(timetree)
 
 ### set up the monitors that will output parameter values to file and screen
 monitors.append( mnScreen(printgen=10, event_rate, speciation_mean) )
-monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="output_seq/seq_sim_test"+i+".trees") )
-monitors.append( mnModel(filename="output/primates_BDS.log",printgen=1, separator = TAB) )
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="4_output_seq/seq_sim"+i+".trees") )
+monitors.append( mnModel(filename="4_output_seq/seq_sim"+i+".log",printgen=1, separator = TAB) )
 
 
 ################
@@ -152,13 +150,10 @@ mymcmc.run(generations=20000, tuningInterval=200)
 
 # Now, we will analyze the tree output_seq.
 # Let us start by reading in the tree trace
-treetrace = readTreeTrace("output_seq/seq_sim_test"+i+".trees", treetype="non-clock")
+treetrace = readTreeTrace("4_output_seq/seq_sim"+i+".trees", treetype="non-clock")
 # and then get the MAP tree
-map_tree = mapTree(treetrace,"output_seq/seq_sim_test"+i+".tree")
+map_tree = mapTree(treetrace,"4_output_seq/seq_sim"+i+".tree")
 
 }
-# you may want to quit RevBayes now
+# quit RevBayes now
 q()
-
-##ASK ABOUT OUTPUTTING BRANCHRATES!!!!!
-#ALSO, need a version to do analysis under relaxed clock model
