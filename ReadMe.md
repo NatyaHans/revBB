@@ -49,3 +49,13 @@
 ## Branch 2
     - Use model parameters from mcmc_BDS.Rev to compute lnLikelihood on held out (test) data
     - rank (Q,Tree prior,clock`) models w.r.t lnLikelihood on held out (test) data
+
+
+UPDATING PIDs of th 3-treeInference and 4-seqInference (we can delete the other .out files
+[nhans@login4 revBB]$ squeue -u nhans
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          37200814 hpg2-comp bdtreean    nhans  R    1:54:04      1 c25a-s1
+          37206125 hpg2-comp  mcmcBDS    nhans  R       3:04      1 c22a-s19
+
+
+
