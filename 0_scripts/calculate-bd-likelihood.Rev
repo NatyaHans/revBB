@@ -7,26 +7,22 @@ aln <- readDiscreteCharacterData(filename)
 #rate matrix, need to read in from posterior estimates
 Q <- fnJC(4)
 
-#read in tree topology
-tre = readTrees("1_data_simtreebd/simbd_1_.nex")[1]
+#read in tree topology, now as constant, can pass directly
+#TODO: this tree topology should be
+tre <- readTrees("1_data_simtreebd/simbd_1_.nex")[1]
 #get taxa
 taxa <- tre.taxa()
 
 #calibrate root time/age
 root_time = tre.rootAge()
 
-
-
 #tree prior
-treeprior ~ dnBDP(lambda=0.1, mu=0.0, rho=0.7, rootAge=root_time, samplingStrategy="uniform", condition="survival", taxa=taxa)
-
-treeprior.clamp(tre)
+#treeprior ~ dnBDP(lambda=0.1, mu=0.0, rho=0.7, rootAge=root_time, #samplingStrategy="uniform", condition="survival", taxa=taxa)
+#treeprior.clamp(tre)
 
 #create stochastic node
-seqs ~ dnPhyloCTMC(tree=treeprior, Q=Q, type="DNA" )
-
-#TODO: need to read in branch rates OR total clock rate from outfile
-#seqs ~ dnPhyloCTMC(tree=treeprior, Q=Q, branchRates=br, type="DNA" )
+#TODO: transform to phylograms prior to like comps
+seqs ~ dnPhyloCTMC(tree=tre, Q=Q, type="DNA")
 
 #now attach data to the node
 seqs.clamp(aln)
@@ -34,6 +30,6 @@ seqs.clamp(aln)
 #now calculate probability
 logprob := seqs.lnProbability()
 
-#let write it out
+#write out lnLike to file
 cerberus = VectorMonitors()
-cerberus.append( mnFile(logprob, filename="test-prob-out.log") )
+cerberus.append( write(logprob, filename="5_output_marginal/cv_loglike_1.log") )
