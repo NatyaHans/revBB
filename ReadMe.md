@@ -1,5 +1,10 @@
 # Project Pipeline
-# All the scripts are in folder 0_scripts
+## Folder assignments
+### 0_scripts - script files
+### 1_data_simtreebd - simulated trees
+### 2_seqdata_simseqbd - simulated sequence
+### 3_treeInference - tree topology inference output files
+### 4_seqInference - sequence inference output files
 
 # Part 1 :
 # Question: Can we accurately estimate diversification parameters from independently fixing the tree and fixing the sequences?
