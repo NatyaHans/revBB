@@ -1,0 +1,39 @@
+/ufrc/burleigh/nhans/GitHubNH/revBB
+c24b-s22.ufhpc
+Fri May 31 03:58:07 EDT 2019
+
+RevBayes version (1.0.11)
+Build from development (0ef095) on Tue May 28 09:41:26 EDT 2019
+
+Visit the website www.RevBayes.com for more information about RevBayes.
+
+RevBayes is free software released under the GPL license, version 3. Type 'license()' for details.
+
+To quit RevBayes type 'quit()' or 'q()'.
+
+
+> source("0_scripts/mcmc_BDS_updated.Rev")
+   Processing file "0_scripts/mcmc_BDS_updated.Rev"
+   Successfully read one character matrix from file '2_seqdata_simseqbd/seq_sim_1.nex'
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+
+   Running MCMC simulation
+   This simulation runs 2 independent replicates.
+   The simulator uses 106 different moves in a random move schedule with 318.5 moves per iteration
+
+Iter        |      Posterior   |     Likelihood   |          Prior   |     event_rate   |   speciation..   |    elapsed   |        ETA   |
+------------------------------------------------------------------------------------------------------------------------------------------
+0           |       -63014.9   |       -62707.8   |       -307.142   |      0.1968084   |     0.09804339   |   00:00:00   |   --:--:--   |
+100         |       -15645.2   |       -15655.2   |        9.94186   |      0.1159803   |      0.1445945   |   00:00:16   |   --:--:--   |
+200         |       -14886.3   |       -14989.9   |        103.642   |     0.07458098   |     0.08150516   |   00:00:32   |   00:52:48   |
+300         |       -14865.2   |       -14991.5   |          126.3   |      0.1746043   |      0.1056411   |   00:00:46   |   00:50:20   |
+400         |       -14846.7   |       -14985.8   |        139.074   |      0.1252285   |      0.1246421   |   00:00:59   |   00:48:11   |
+500         |       -14826.3   |       -14974.1   |        147.745   |      0.1305657   |      0.1557722   |   00:01:13   |   00:47:27   |
+600         |       -14814.4   |       -14981.7   |        167.315   |     0.05492883   |     0.04733814   |   00:01:28   |   00:47:25   |
+700         |       -14785.4   |       -14976.3   |        190.908   |     0.04613673   |      0.0401922   |   00:01:41   |   00:46:24   |
+800         |         -14811   |       -14994.2   |        183.276   |     0.04221261   |     0.05482714   |   00:01:55   |   00:46:00   |
+900         |       -14793.6   |       -14965.7   |         172.05   |     0.02026928   |     0.08964922   |   00:02:09   |   00:45:37   |
+1000        |       -14812.8   |       -14988.5   |         175.71   |      0.0922442   |      0.2405688   |   00:02:23   |   00:45:17   |
+1100        |       -14795.8   |         -14980   |        184.199   |     0.03858818   |     0.05733487   |   00:02:36   |   00:44:40   |
+1200        |       -14797.1   |       -14984.6   |        187.451   |     0.06955285   |      0.1270998   |   00:02:48   |   00:43:52   |
