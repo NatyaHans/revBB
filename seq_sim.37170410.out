@@ -1,0 +1,221 @@
+/ufrc/burleigh/nhans/GitHubNH/revBB
+c25b-s18.ufhpc
+Fri May 31 02:22:07 EDT 2019
+
+RevBayes version (1.0.11)
+Build from development (0ef095) on Tue May 28 09:41:26 EDT 2019
+
+Visit the website www.RevBayes.com for more information about RevBayes.
+
+RevBayes is free software released under the GPL license, version 3. Type 'license()' for details.
+
+To quit RevBayes type 'quit()' or 'q()'.
+
+
+> source("0_scripts/seq_sim.Rev")
+   Processing file "0_scripts/seq_sim.Rev"
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Attempting to read the contents of file "simbdshifttree.nex"
+   Successfully read file
+   Error:	Vector index out of range: 100 of 100
+   Error:	Problem processing line 21 in file "0_scripts/seq_sim.Rev"
+> 

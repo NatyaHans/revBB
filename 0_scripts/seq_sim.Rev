@@ -1,6 +1,6 @@
 # you need to read a tree and call it sim_tree
-for (i in 1:1000) {
-sim_tree <- readTrees("data_simtreebd/simbd_"+i+"_.nex")[1]
+for(i in 1:1000){
+sim_tree <- readTrees("1_data_simtreebd/simbdshifttree.nex")[i]
 n_branches <- sim_tree.ntips()*2-2
 
 # get the tree length
@@ -16,6 +16,6 @@ for ( j in 1:n_branches ) {
 Q <- fnJC(4)
 
 seq ~ dnPhyloCTMC(sim_tree, Q=Q, branchRates=branch_rate, type="DNA", nSites=1000)
-file_name <- "output/seq_sim_"+i+".nex"
+file_name <- "2_seqdata_simseqbd/seq_sim_"+i+".nex"
 writeNexus(seq,file=file_name)
 }

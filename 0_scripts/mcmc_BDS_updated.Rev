@@ -12,11 +12,11 @@
 # Reading in the Data #
 #######################
 
-for (i in 1:1){
+for (i in 1:100){
 data = readDiscreteCharacterData("2_seqdata_simseqbd/seq_sim_"+i+".nex")
 
 # Read in the observed phylogeny
-observed_phylogeny <- readTrees("1_data_simtreebd/simbd_"+i+"_.nex")[1]
+observed_phylogeny <- readTrees("1_data_simtreebd/simbdshifttree.nex")[1]
 
 # Get the names of the taxa in the tree and the age of the tree. We need these later on.
 taxa <- observed_phylogeny.taxa()
@@ -116,7 +116,7 @@ for ( j in 1:n_branches ) {
 }
 
 # the sequence evolution model
-seq ~ dnPhyloCTMC(tree=timetree, Q=Q, branchRates=clock_rate, type="DNA")
+seq ~ dnPhyloCTMC(tree=timetree, Q=Q, branchRates=branch_rate, type="DNA")
 
 # attach the data
 seq.clamp(data)
@@ -130,8 +130,8 @@ mymodel = model(timetree)
 
 ### set up the monitors that will output parameter values to file and screen
 monitors.append( mnScreen(printgen=10, event_rate, speciation_mean) )
-monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="4_output_seq/seq_sim"+i+".trees") )
-monitors.append( mnModel(filename="4_output_seq/seq_sim"+i+".log",printgen=1, separator = TAB) )
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="4_seqInference/seq_sim"+i+".trees") )
+monitors.append( mnModel(filename="4_seqInference/seq_sim"+i+".log",printgen=1, separator = TAB) )
 
 
 ################
@@ -148,11 +148,11 @@ mymcmc.run(generations=20000, tuningInterval=200)
 # Post processing #
 ###################
 
-# Now, we will analyze the tree output_seq.
+# Now, we will analyze the tree seqInference.
 # Let us start by reading in the tree trace
-treetrace = readTreeTrace("4_output_seq/seq_sim"+i+".trees", treetype="non-clock")
+treetrace = readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
 # and then get the MAP tree
-map_tree = mapTree(treetrace,"4_output_seq/seq_sim"+i+".tree")
+map_tree = mapTree(treetrace,"4_seqInference/seq_sim"+i+".tree")
 
 }
 # quit RevBayes now
