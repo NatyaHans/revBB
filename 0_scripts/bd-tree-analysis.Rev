@@ -1,6 +1,6 @@
 #read in trees
 for(i in 1:100){
-tre = readTrees("1_data_simtreebd/simbdshifttree.nex")[1]
+tre = readTrees("1_data_simtreebd/simbdshifttree.nex")[i]
 taxa <- tre.taxa()
 tree_length <- tre.treeLength()
 
@@ -40,6 +40,8 @@ rate_cat_probs <- simplex( rep(1, NUM_RATE_CATEGORIES) )
 
 # sampling fractions
 rho<-1.0
+# fix this for constant rate speciation and extinction (rho) otherwise these are not identifiable)
+monitors.append( mnScreen(printgen=10, event_rate, speciation_mean, extinction_mean) )
 
 #define diversification stuffs
 root_age <- tre.rootAge()
