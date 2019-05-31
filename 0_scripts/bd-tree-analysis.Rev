@@ -1,6 +1,6 @@
 #read in trees
 for(i in 1:100){
-tre = readTrees("1_data_simtreebd/simbd_"+i+"_.nex")[1]
+tre = readTrees("1_data_simtreebd/simbdshifttree.nex")[1]
 taxa <- tre.taxa()
 tree_length <- tre.treeLength()
 
@@ -12,51 +12,62 @@ monitors = VectorMonitors()
 # Create the rates #
 ####################
 
+NUM_TOTAL_SPECIES=50
+NUM_RATE_CATEGORIES=4
+H=0.587405
+
 ### Specify a prior on the speciation and extinction rates
 rate_mean <- (NUM_TOTAL_SPECIES-2) / tree_length
 
+speciation_mean ~ dnLoguniform( 1E-6, 1E2)
+extinction_mean ~ dnLoguniform( 1E-6, 1E2)
+
+
+speciation_sd ~ dnExponential( 1.0 / H )
+extinction_mean.setValue( speciation_mean / 2.0 )
+
+speciation := fnDiscretizeDistribution( dnLognormal(ln(speciation_mean), speciation_sd), NUM_RATE_CATEGORIES )
+extinction := rep( extinction_mean, NUM_RATE_CATEGORIES )
+
+moves.append( mvScale(speciation_mean, lambda=1, tune=true, weight=2.0) )
+moves.append( mvScale(extinction_mean, lambda=1, tune=true, weight=2.0) )
+moves.append( mvScale(speciation_sd, lambda=1, tune=true, weight=2.0) )
+
+event_rate ~ dnUniform(0.0, 100.0/tree_length)
+moves.append( mvScale(event_rate, lambda=1, tune=true, weight=2.0) )
+
+rate_cat_probs <- simplex( rep(1, NUM_RATE_CATEGORIES) )
+
+# sampling fractions
+rho<-1.0
+
 #define diversification stuffs
-diversification_mean <- 10
-diversification_sd <- 0.587405
-
-#define diversification prior as lognormal, why IDK
-diversification ~ dnLognormal(mean=rate_mean, sd=diversification_sd)
-
-
-#turnover prior as lognormal, IDK why again...
-turnover_mean <- 10
-turnover_sd <- 0.587405
-turnover ~ dnLognormal(mean=rate_mean/2,sd=turnover_sd)
-
-#proposal for turnover
-moves.append( mvScale(turnover,lambda=1.0,tune=true,weight=3.0) )
-
-#Proposals for diversification
-moves.append( mvScale(diversification,lambda=1.0,tune=true,weight=3.0) )
-
-#deterministic nodes
-birth_rate := diversification + turnover
-death_rate := turnover
-
-#root time
 root_age <- tre.rootAge()
 
-#sampling
-rho <- 1.0
 
 #set up tree model
-timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_age, samplingStrategy="uniform", condition="survival", taxa=taxa)
+#timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_age, samplingStrategy="uniform", condition="survival", taxa=taxa)
+
+timetree ~ dnCDBDP( rootAge           = root_age,
+                    speciationRates   = speciation,
+                    extinctionRates   = extinction,
+                    Q                 = fnJC(NUM_RATE_CATEGORIES),
+                    delta             = event_rate,
+                    pi                = rate_cat_probs,
+                    rho               = rho,
+                    condition         = "time" )
 timetree.clamp(tre)
 
 #set up model for mcmc
-bd_model = model(birth_rate)
+my_model = model(speciation)
 
 #set up file writers
-monitors.append( mnModel(filename="output/tree-bd-analysis"+i+".log",printgen=10, separator = TAB ))
-monitors.append( mnScreen(printgen=100, birth_rate, death_rate) )
+monitors.append( mnModel(filename="3_treeInference/tree-bd-analysis"+i+".log",printgen=10, separator = TAB ))
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=1, filename="3_treeInference/branchrates-stocastic"+i+".log") )
+monitors.append( mnScreen(printgen=10, event_rate, speciation_mean, extinction_mean) )
 
 #set up mcmc
-mcmc = mcmc(bd_model, monitors, moves, nruns=2, combine="mixed")
+mymcmc = mcmc(my_model, monitors, moves, nruns=2, combine="mixed")
 
 #run dat analysis
 n_mcmc <- 10000
@@ -71,8 +82,8 @@ monitors.append( mnScreen(marginalLike) )
 #calculate marginal likelihood for model comparison
 marginalLike = ss.marginal()
 
-#TODO: figure out why this is broken, not writing or creating file
-monitors.append( write(marginalLike, filename="5_output_marginal/marginal_" +i+ "_.log", separator=TAB) )
+#Figure out why this is broken, not writing or creating file
+monitors.append( write(marginalLike, filename="5_marginals/marginal_" +i+ "_.log", separator=TAB) )
 
 
 }
