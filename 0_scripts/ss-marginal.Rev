@@ -1,4 +1,4 @@
-mymodel = model(turnover)
+mymodel = model(timetree)
 
 pow_p = powerPosterior(mymodel, moves, monitors, "output/model1.out", cats=30)
 pow_p.burnin(generations=500,tuningInterval=10)

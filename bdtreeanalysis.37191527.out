@@ -1,0 +1,43 @@
+/ufrc/burleigh/nhans/GitHubNH/revBB
+c32a-s37.ufhpc
+Fri May 31 13:49:25 EDT 2019
+
+RevBayes version (1.0.11)
+Build from development (0ef095) on Tue May 28 09:41:26 EDT 2019
+
+Visit the website www.RevBayes.com for more information about RevBayes.
+
+RevBayes is free software released under the GPL license, version 3. Type 'license()' for details.
+
+To quit RevBayes type 'quit()' or 'q()'.
+
+
+> source("0_scripts/bd-tree-analysis.Rev")
+   Processing file "0_scripts/bd-tree-analysis.Rev"
+   Attempting to read the contents of file "simbdstree1.nex"
+   Successfully read file
+[c32a-s37:29073:0:29073] Caught signal 11 (Segmentation fault: address not mapped to object at address 0xd9)
+==== backtrace ====
+    0  /usr/lib64/libucs.so.0(+0x174b0) [0x2b6b6592e4b0]
+    1  /usr/lib64/libucs.so.0(+0x17662) [0x2b6b6592e662]
+    2  rb(_ZNK12RevBayesCore7DagNode23incrementReferenceCountEv+0) [0x16ecd50]
+    3  rb(_ZN12RevBayesCore12NexusMonitorC1EPNS_12TypedDagNodeINS_4TreeEEERKSt6vectorIPNS_7DagNodeESaIS7_EEbmRKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEbb+0x113) [0x15c4f83]
+    4  rb(_ZN11RevLanguage14Mntr_NexusFile23constructInternalObjectEv+0x2e3) [0x101af33]
+    5  rb(_ZN11RevLanguage19ConstructorFunction7executeEv+0x2c2) [0x1094952]
+    6  rb(_ZN11RevLanguage18SyntaxFunctionCall15evaluateContentERNS_11EnvironmentEb+0x33d) [0x10258dd]
+    7  rb(_ZN11RevLanguage18SyntaxFunctionCall15evaluateContentERNS_11EnvironmentEb+0x9d) [0x102563d]
+    8  rb(_ZN11RevLanguage15SyntaxStatement15evaluateContentERNS_11EnvironmentEb+0x52f) [0x140451f]
+    9  rb(_ZNK11RevLanguage6Parser7executeEPNS_13SyntaxElementERNS_11EnvironmentE+0xa3) [0xbdd553]
+   10  rb(_Z7yyparsev+0x5b9) [0x1022cb9]
+   11  rb(_ZN11RevLanguage6Parser14processCommandERNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPNS_11EnvironmentE+0xf8) [0xbdfdf8]
+   12  rb(_ZN11RevLanguage11Func_source7executeEv+0x4c6) [0x1487716]
+   13  rb(_ZN11RevLanguage18SyntaxFunctionCall15evaluateContentERNS_11EnvironmentEb+0x33d) [0x10258dd]
+   14  rb(_ZNK11RevLanguage6Parser7executeEPNS_13SyntaxElementERNS_11EnvironmentE+0xa3) [0xbdd553]
+   15  rb(_Z7yyparsev+0x5b9) [0x1022cb9]
+   16  rb(_ZN11RevLanguage6Parser14processCommandERNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPNS_11EnvironmentE+0xf8) [0xbdfdf8]
+   17  rb(_ZN15RevLanguageMain27startRevLanguageEnvironmentESt6vectorINSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESaIS6_EE+0x328) [0xbe8f08]
+   18  rb(main+0x334) [0xb8f304]
+   19  /usr/lib64/libc.so.6(__libc_start_main+0xf5) [0x2b6b60b563d5]
+   20  rb() [0xbcb4e7]
+===================
+/tmp/slurmd/job37191527/slurm_script: line 23: 29073 Segmentation fault      (core dumped) rb 0_scripts/bd-tree-analysis.Rev

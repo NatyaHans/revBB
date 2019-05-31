@@ -1,0 +1,100 @@
+tree_length <- tre.treeLength()
+tre
+q()
+for(i in 1:100){
+tre = readTrees("1_data_simtreebd/simbdstree"+i+".nex")[1]
+taxa <- tre.taxa()
+tree_length <- tre.treeLength()
+#set up moves and monitors
+moves = VectorMoves()
+monitors = VectorMonitors()
+}
+NUM_TOTAL_SPECIES=50
+NUM_RATE_CATEGORIES=4
+H=0.587405
+i<-1
+clear
+i<-1
+tre = readTrees("1_data_simtreebd/simbdstree"+i+".nex")[1]
+taxa <- tre.taxa()
+tree_length <- tre.treeLength()
+#set up moves and monitors
+moves = VectorMoves()
+monitors = VectorMonitors()
+####################
+# Create the rates #
+####################
+NUM_TOTAL_SPECIES=50
+NUM_RATE_CATEGORIES=4
+H=0.587405
+### Specify a prior on the speciation and extinction rates
+rate_mean <- (NUM_TOTAL_SPECIES-2) / tree_length
+speciation_mean ~ dnLoguniform( 1E-6, 1E2)
+speciation_mean.setValue( rate_mean )
+moves.append( mvScale(speciation_mean, lambda=1, tune=true, weight=2.0) )
+speciation_sd ~ dnExponential( 1.0 / H )
+moves.append( mvScale(speciation_sd, lambda=1, tune=true, weight=2.0) )
+extinction_mean ~ dnLoguniform( 1E-6, 1E2)
+extinction_mean.setValue( speciation_mean / 2.0 )
+moves.append( mvScale(extinction_mean, lambda=1, tune=true, weight=2.0) )
+speciation := fnDiscretizeDistribution( dnLognormal(ln(speciation_mean), speciation_sd), NUM_RATE_CATEGORIES )
+extinction := rep( extinction_mean, NUM_RATE_CATEGORIES )
+### Create a exponential distributed variable for the rate of rate-shift events
+event_rate ~ dnUniform(0.0, 100.0/tree_length)
+moves.append( mvScale(event_rate, lambda=1, tune=true, weight=2.0) )
+rate_cat_probs <- simplex( rep(1, NUM_RATE_CATEGORIES) )
+rho<-1.0
+# fix this for constant rate speciation and extinction (rho) otherwise these are not identifiable)
+monitors.append( mnScreen(printgen=10, event_rate, speciation_mean, extinction_mean) )
+#define diversification stuffs
+root_age <- tre.rootAge()
+#set up tree model
+#timetree ~ dnBDP(lambda=birth_rate, mu=death_rate, rho=rho, rootAge=root_age, samplingStrategy="uniform", condition="survival", taxa=taxa)
+timetree ~ dnCDBDP( rootAge           = root_age,
+                    speciationRates   = speciation,
+                    extinctionRates   = extinction,
+                    Q                 = fnJC(NUM_RATE_CATEGORIES),
+                    delta             = event_rate,
+                    pi                = rate_cat_probs,
+                    rho               = rho,
+                    condition         = "survival" )
+timetree.clamp(tre)
+my_model = model(speciation)
+#set up file writers
+monitors.append( mnModel(filename="3_treeInference/tree-bd-analysis"+i+".log",printgen=100, separator = TAB ))
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="3_treeInference/branchrates-stocastic"+i+".log") )
+monitors.append( mnScreen(printgen=100, event_rate, speciation_mean, extinction_mean) )
+monitors.append( mnNexus(timetree,filename="3_treeInference/posteriortrees"+i+"nex"))
+q()
+treetrace = readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+i<-1
+treetrace = readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+treetrace = readTree("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+treetrace = readTrees("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+q()
+readTrees<-("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+i<-1
+readTrees<-("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+q()
+ readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+i<-1
+ readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+ readTreeTrace("4_seqInference/seq_sim"+i+".tree", treetype="non-clock")
+ readTreeTrace(("4_seqInference/seq_sim"+i+".trees",) treetype="non-clock")
+readTreeTrace
+ readTreeTrace(("4_seqInference/seq_sim"+i+".tree"), treetype="non-clock")
+ readTreeTrace(("4_seqInference/seq_sim"+i+".trees"), treetype="non-clock")
+ readTreeTrace("4_seqInference/seq_sim"+i+".trees")
+ readTreeTrace("../4
+q)(
+q()
+i<-1
+treetrace = readTreeTrace("4_seqInference/posteriortreesoonseq"+i+".tre", treetype="non-clock")
+treetrace = readTreeTrace("4_seqInference/posteriortreesoonseq"+i+".nex", treetype="non-clock")
+q()
+treetrace = readTreeTrace("4_seqInference/posteriortreesoonseq"+i+".nex", treetype="non-clock")
+i<-1
+treetrace = readTreeTrace("4_seqInference/posteriortreesoonseq"+i+".nex", treetype="non-clock")
+map_tree = mapTree(treetrace,"2_seqdata_simseqbd/seq_sim"+i+".nex")
+lsr
+q()

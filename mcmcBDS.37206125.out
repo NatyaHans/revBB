@@ -1,0 +1,31 @@
+/ufrc/burleigh/nhans/GitHubNH/revBB
+c22a-s19.ufhpc
+Fri May 31 17:40:19 EDT 2019
+
+RevBayes version (1.0.11)
+Build from development (0ef095) on Tue May 28 09:41:26 EDT 2019
+
+Visit the website www.RevBayes.com for more information about RevBayes.
+
+RevBayes is free software released under the GPL license, version 3. Type 'license()' for details.
+
+To quit RevBayes type 'quit()' or 'q()'.
+
+
+> source("0_scripts/mcmc_BDS_updated.Rev")
+   Processing file "0_scripts/mcmc_BDS_updated.Rev"
+   Successfully read one character matrix from file '2_seqdata_simseqbd/seq_sim_1.nex'
+   Attempting to read the contents of file "simbdstree1.nex"
+   Successfully read file
+
+   Running MCMC simulation
+   This simulation runs 2 independent replicates.
+   The simulator uses 106 different moves in a random move schedule with 318.5 moves per iteration
+
+Iter        |      Posterior   |     Likelihood   |          Prior   |     event_rate   |   speciation..   |    elapsed   |        ETA   |
+------------------------------------------------------------------------------------------------------------------------------------------
+0           |       -15465.1   |       -15627.4   |        162.306   |     0.06583653   |     0.09804339   |   00:00:00   |   --:--:--   |
+100         |       -14760.2   |         -14974   |        213.778   |     0.02737313   |      0.1103008   |   00:00:15   |   --:--:--   |
+200         |       -14745.7   |       -14975.5   |        229.765   |      0.1980715   |      0.1245414   |   00:00:29   |   00:47:51   |
+300         |       -14745.6   |       -14972.7   |        227.094   |      0.1711373   |      0.1280599   |   00:00:43   |   00:47:03   |
+400         |       -14736.3   |       -14967.1   |        230.809   |      0.1986718   |     0.09318479   |   00:00:57   |   00:46:33   |
