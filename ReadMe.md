@@ -10,6 +10,11 @@
                   - output simulated trees =1000 (in nexus format)
                   - data saved in folder 1_data_simtreebd
 
+    - These fixed trees are then used for estimating lambda and mu by using RevBayes script
+                  
+
+
+- 
 # Simulate alignments using RevBayes
     - Folder Name: 2_seqdata_simseqbd
     - dependencies seq_sim.Rev
@@ -19,7 +24,7 @@
   # Branch 1
     - Treat trees as fixed
     - Run through RevBayes using bd-tree-analysis.Rev
-    - Extract diversification parameters
+    - Extract diverification parameters
 
   # Branch 2
     - Treat sequences as fixed
