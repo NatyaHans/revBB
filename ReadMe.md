@@ -23,7 +23,7 @@
   - Run through RevBayes using mcmc_BDS.Rev (joint estimation of tree & params)
   - Extract diversification parameters by using a mean point estimation
   - Build lambda/mu distribution histograms
-  - Compare where Branch 1's parameters lie on the histograms?
+  - Compare where Branch 1engths parameters lie on the histograms?
 
  - These fixed trees are then used for estimating lambda and mu by using RevBayes script
                   
