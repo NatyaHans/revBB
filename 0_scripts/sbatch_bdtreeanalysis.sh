@@ -21,7 +21,7 @@ module load openmpi/3.1.2
 module load revbayes/1.0.11
 # change the script name and path
 
-rb bd-tree-analysis.Rev
+rb 0_scripts/bd-tree-analysis.Rev
 
 # nhans@ufl.edu
 
