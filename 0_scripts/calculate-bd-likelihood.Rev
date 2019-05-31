@@ -29,7 +29,7 @@ root_time = tre.rootAge()
 
 #create stochastic node
 #TODO: transform to phylograms prior to like comps
-seqs ~ dnPhyloCTMC(tree=phylo, Q=Q, type="DNA")
+seqs ~ dnPhyloCTMC(tree=tre, Q=Q, type="DNA")
 
 #now attach data to the node
 seqs.clamp(aln)
