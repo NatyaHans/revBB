@@ -4,15 +4,21 @@
 # Part 1 :
 # Question: Can we accurately estimate diversification parameters from independently fixing the tree and fixing the sequences?
 # Approach:
-  - Simulate birth death trees ( script simtreebd.R in R) under a birth-death-shift model
+  - Simulate birth death trees ( script simtreebd.R in R) under a birth-death model
       - Folder Name: 1_data_simtreebd
       - dependencies simulate.NotNullTree.R
       - Fixed taxa size 50,
       - output simulated trees =1000 (in nexus format)
       - data saved in folder 1_data_simtreebd
+
   - Simulate sequences ( script seq_sim.Rev ) along the simulated trees, under a relaxed clock model (lognormal distribution) and JC model
       - Folder Name: 2_seqdata_simseqbd
       - dependencies seq_sim.Rev
+
+  - Simulate birth death shift trees  (script bdshifttree.R in R) under a birth-death-shift model
+      - Folder Name:
+      - No dependencies
+      - Outputs the nexus trees as list (since Revbayes can take that output)
 
 ## Branch 1
   - Treat trees as fixed
