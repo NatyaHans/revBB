@@ -125,9 +125,9 @@ mymodel = model(timetree)
 
 ### set up the monitors that will output parameter values to file and screen
 monitors.append( mnScreen(printgen=100, event_rate, speciation_mean) )
-monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="4_seqInference/seq_sim"+i+".trees") )
+monitors.append( mnStochasticBranchRate(cdbdp=timetree, printgen=100, filename="4_seqInference/seq_sim"+i+".branchrates") ) # changing the branch rates to not confuse it with trees
 monitors.append( mnModel(filename="4_seqInference/seq_sim"+i+".log",printgen=100, separator = TAB) )
-monitors.append( mnExtNewick(timetree,filename="4_seqInference/posteriortreesoonseq"+i+".nex",printgen=50)) 
+monitors.append( mnExtNewick(timetree,filename="4_seqInference/posteriortreesoonseq"+i+".tre",printgen=50)) # posterior tree in newick format(so not nexus)
 
 ################
 # The Analysis #
@@ -145,9 +145,9 @@ mymcmc.run(generations=20000, tuningInterval=200)
 
 # Now, we will analyze the tree seqInference.
 # Let us start by reading in the tree trace
-treetrace = readTreeTrace("4_seqInference/seq_sim"+i+".trees", treetype="non-clock")
+treetrace = readTreeTrace("4_seqInference/posteriortreesoonseq"+i+".tre", treetype="non-clock")
 # and then get the MAP tree
-map_tree = mapTree(treetrace,"4_seqInference/seq_sim"+i+".tree")
+map_tree = mapTree(treetrace,"4_seqInference/posteriortreesoonseq"+i+".tre")
 
 }
 # quit RevBayes now
