@@ -1,0 +1,3 @@
+treetrace=readTreeTrace("simbdshifttree.nex",treetype="clock")
+treetrace=readTreeTrace("simbdshifttree_copy.nex",treetype="clock")
+treetrace=readTreeTrace("simbdshifttree_copy2.nex",treetype="clock")
